@@ -1,4 +1,4 @@
-# test
+# Vue + Vuex + Auth + Vue-router
 
 ## Project setup
 ```
