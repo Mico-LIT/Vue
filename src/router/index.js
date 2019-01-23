@@ -1,63 +1,22 @@
 import Vue from "vue";
-import Router from "vue-router";
+import VueRouter from "vue-router";
+// https://github.com/declandewet/vue-meta
+import VueMeta from "vue-meta";
+// Adds a loading bar at the top during page loads.
+import NProgress from "nprogress/nprogress";
+import store from "@state/store";
+import routes from "./routes";
 
-import store from "@/state/store";
+Vue.use(VueRouter);
+Vue.use(VueMeta, {
+  // The component option name that vue-meta looks for meta info on.
+  keyName: "page"
+});
 
-Vue.use(Router);
-
-const router = new Router({
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: () => import("./views/Home.vue")
-    },
-    {
-      path: "/info",
-      name: "info",
-      component: () => import("./views/Info.vue")
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: () => import("./views/Login.vue")
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import("./views/About.vue")
-    },
-    {
-      path: "/profile",
-      name: "profile",
-      component: () => import("./views/Profile.vue"),
-      meta: {
-        authRequired: true
-      },
-      props: route => ({ user: store.state.auth.currentUser || {} })
-    },
-    {
-      path: "/logout",
-      name: "logout",
-      meta: {
-        authRequired: true,
-        beforeResolve(routeTo, routeFrom, next) {
-          store.dispatch("auth/logOut");
-          const authRequiredOnPreviousRoute = routeFrom.matched.some(
-            route => route.meta.authRequired
-          );
-          // Navigate back to previous page, or home as a fallback
-          next(
-            authRequiredOnPreviousRoute ? { name: "home" } : { ...routeFrom }
-          );
-        }
-      }
-    },
-    {
-      path: "*",
-      redirect: "/"
-    }
-  ],
+const router = new VueRouter({
+  routes,
+  // Simulate native-like scroll behavior when navigating to a new
+  // route and using back/forward buttons.
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -134,5 +93,3 @@ router.beforeResolve(async (routeTo, routeFrom, next) => {
   // If we reach this point, continue resolving the route.
   next();
 });
-
-export default router;

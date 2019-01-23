@@ -1,6 +1,7 @@
 import axios from "axios";
-import { api } from "./config";
-import store from "./state/store";
+import { api } from "@/config";
+import store from "@/state/store";
+import router from "@/router";
 //import router from "@/router";
 
 function request(method, url, params, data) {
