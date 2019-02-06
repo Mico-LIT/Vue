@@ -10,6 +10,7 @@
 
 <script>
 import AppInput from "@/components/ui/_base-input";
+import { accountService } from "@/_services/accountService";
 
 export default {
   data() {
@@ -23,14 +24,7 @@ export default {
   },
   methods: {
     login() {
-      this.$store
-        .dispatch("auth/logIn", {
-          userName: this.userName,
-          password: this.password
-        })
-        .then(() => {
-          this.$router.push("/");
-        });
+      accountService.LogIn(this.userName, this.password);
     }
   }
 };

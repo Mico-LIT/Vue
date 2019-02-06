@@ -3,11 +3,12 @@ import VueRouter from "vue-router";
 // https://github.com/declandewet/vue-meta
 import VueMeta from "vue-meta";
 // Adds a loading bar at the top during page loads.
-import NProgress from "nprogress/nprogress";
-import store from "@state/store";
-import routes from "./routes";
+//import NProgress from "nprogress/nprogress";
+import store from "@/state/store";
+import routes from "@/router/routes";
 
 Vue.use(VueRouter);
+
 Vue.use(VueMeta, {
   // The component option name that vue-meta looks for meta info on.
   keyName: "page"
@@ -93,3 +94,5 @@ router.beforeResolve(async (routeTo, routeFrom, next) => {
   // If we reach this point, continue resolving the route.
   next();
 });
+
+export default router;

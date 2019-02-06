@@ -1,5 +1,6 @@
 //import axios from "axios";
-import baseAxios from "../../baseAxios";
+//import http from "@/core/baseAxios";
+//import { accountService } from "@/_services/accountService";
 
 export const state = {
   currentUser: getSavedState("auth.currentUser")
@@ -29,35 +30,35 @@ export const actions = {
   },
 
   // Logs in the current user.
-  logIn({ commit, dispatch, getters }, { userName, password } = {}) {
-    // eslint-disable-next-line no-debugger
-    debugger;
+  logIn({ commit, dispatch, getters }, user = {}) {
+    commit("SET_CURRENT_USER", user);
 
     //if (getters.loggedIn) return dispatch("validate");
-
-    var body = {
-      username: userName,
-      password: password,
-      grant_type: "password"
-    };
-
-    return baseAxios.post("/posts", body).then(response => {
-      const user = response.data;
-
-      commit("SET_CURRENT_USER", {
-        id: 1,
-        userName: userName,
-        firstName: "Test",
-        lastName: "Test2",
-        token: "Dzsp2DX5udgxYlvIt"
-      });
-      return user;
-    });
   },
 
   // Logs out the current user.
   logOut({ commit }) {
     commit("SET_CURRENT_USER", null);
+  },
+
+  // Validates the current user's token and refreshes it
+  // with new data from the API.
+  validate({ commit, state }) {
+    //   if (!state.currentUser) return Promise.resolve(null)
+    //   return axios
+    //     .get('/api/session')
+    //     .then((response) => {
+    //       const user = response.data
+    //       commit('SET_CURRENT_USER', user)
+    //       return user
+    //     })
+    //     .catch((error) => {
+    //       if (error.response && error.response.status === 401) {
+    //         commit('SET_CURRENT_USER', null)
+    //       }
+    //       return null
+    //     })
+    // }
   }
 };
 

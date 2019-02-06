@@ -1,9 +1,9 @@
 <template>
     <div class="Profile">
-        <h2> userName : {{user.userName}}</h2>
-        <h2> firstName : {{user.firstName}}</h2>
-        <h2> lastName : {{user.lastName}}</h2>
-        <h2> token : {{user.token}}</h2>
+        <h2> userId : {{user.userId}}</h2>
+        <h2> id : {{user.id}}</h2>
+        <h2> title : {{user.title}}</h2>
+        <h2> body : {{user.body}}</h2>
 
         <div>
         <textarea :class="$style.textarea" v-model="texts" ></textarea>  
@@ -16,7 +16,6 @@
 
 <script>
 import Appinput from "@/components/ui/_base-input";
-import baseAxios from "@/baseAxios";
 
 export default {
   data() {
@@ -33,10 +32,12 @@ export default {
   components: { Appinput },
   methods: {
     postClick() {
-      baseAxios.get("/Users").then(response => {
-        //console.log(response.data);
+      cosnole.log(this.user);
+      this.$http.get("/posts/23").then((response)=> {
         this.texts = JSON.stringify(response.data);
-      });
+      }, response => {
+        console.log(response);
+      })
     }
   }
 };

@@ -34,30 +34,30 @@ function request(method, url, params, data) {
   }
 
   // intercept responses before they are handled by then or catch
-  axios.interceptors.response.use(
-    response => {
-      // eslint-disable-next-line no-console
-      console.log("response", response);
-      return response;
-    },
-    error => {
-      //   if (error.response.status == 401) {
-      //     this.$router.push({ path: "/login" });
-      //   }
+  // axios.interceptors.response.use(
+  //   response => {
+  //     // eslint-disable-next-line no-console
+  //     console.log("response", response);
+  //     return response;
+  //   },
+  //   error => {
+  //     //   if (error.response.status == 401) {
+  //     //     this.$router.push({ path: "/login" });
+  //     //   }
 
-      //   if (error.response && error.response.status === 401) {
-      //     router.replace({
-      //       path: '/login',
-      //       query: { redirect: router.currentRoute.fullPath },
-      //     });
-      //   }
-      //   return Promise.reject(error.response.data);
+  //     //   if (error.response && error.response.status === 401) {
+  //     //     router.replace({
+  //     //       path: '/login',
+  //     //       query: { redirect: router.currentRoute.fullPath },
+  //     //     });
+  //     //   }
+  //     //   return Promise.reject(error.response.data);
 
-      // eslint-disable-next-line no-console
-      console.log("1111error", error.response.status);
-      // return Promise.reject(error);
-    }
-  );
+  //     // eslint-disable-next-line no-console
+  //     console.log("1111error", error.response.status);
+  //     // return Promise.reject(error);
+  //   }
+  // );
 
   return axios(axios_config);
 }
