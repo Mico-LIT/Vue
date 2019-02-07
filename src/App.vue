@@ -5,11 +5,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/info">Info</router-link>
-      <router-link to="/profile" v-if="isLoggedIn"> | profile</router-link>
+      <router-link to="/profile" v-if="loggedIn"> | profile</router-link>
       
 <!---->
-      <router-link to="/login"   v-if="!isLoggedIn"> | login</router-link>
-      <router-link to="/logout"  v-if="isLoggedIn"> | logout </router-link>
+      <router-link to="/login"   v-if="!loggedIn"> | login</router-link>
+      <router-link to="/logout"  v-if="loggedIn"> | logout </router-link>
 <!---->
     </div>
     <router-view/>
@@ -17,19 +17,11 @@
 </template>
 
 <script>
+import { authComputed } from "@/state/helpers";
+
 export default {
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-      this.$route.next({ name: "home" });
-    }
-  },
   computed: {
-    isLoggedIn() {
-      // console.log(this.$store.getters["auth/loggedIn"]);
-      // console.log(this.$store);
-      return this.$store.getters["auth/loggedIn"];
-    }
+    ...authComputed
   }
 };
 </script>

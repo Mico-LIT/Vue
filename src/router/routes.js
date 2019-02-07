@@ -31,7 +31,7 @@ export default [
     meta: {
       authRequired: true
     },
-    props: route => ({ user: accountService.GetUser() || {} })
+    props: () => ({ user: accountService.GetUser() || {} })
   },
   {
     path: "/logout",
@@ -41,7 +41,9 @@ export default [
       beforeResolve(routeTo, routeFrom, next) {
         accountService.LogOut();
         //store.dispatch("auth/logOut");
-        const authRequiredOnPreviousRoute = routeFrom.matched.some( route => route.meta.authRequired);
+        const authRequiredOnPreviousRoute = routeFrom.matched.some(
+          route => route.meta.authRequired
+        );
         // Navigate back to previous page, or home as a fallback
         next(authRequiredOnPreviousRoute ? { name: "home" } : { ...routeFrom });
       }

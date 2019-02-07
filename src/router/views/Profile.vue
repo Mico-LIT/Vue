@@ -10,7 +10,7 @@
         <appinput type="Button" value="ok" @click="postClick"></appinput>
 
         </div>
-    </div>       
+    </div>
 
 </template>
 
@@ -32,7 +32,7 @@ export default {
   components: { Appinput },
   methods: {
     postClick() {
-      cosnole.log(this.user);
+      // console.log(this.user);
       this.$http.get("/posts/23").then((response)=> {
         this.texts = JSON.stringify(response.data);
       }, response => {

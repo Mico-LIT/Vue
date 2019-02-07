@@ -16,7 +16,7 @@ function LogIn(username, password) {
     grant_type: "password"
   };
 
-  http.get("/posts/12").then(
+  http.get("/posts/12", body).then(
     response => {
       store.dispatch("auth/logIn", response.data).then(() => {
         router.push("/");
@@ -33,6 +33,7 @@ function LogIn(username, password) {
 //
 function LogOut() {
   store.dispatch("auth/logOut");
+  router.push("/home");
 }
 
 function GetUser() {
